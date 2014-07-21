@@ -428,4 +428,6 @@ public class MySqlVillageDAO implements VillageDAO {
 			}
 		}
 	}
+	
+	//깃 테스트
 }
