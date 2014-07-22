@@ -47,7 +47,7 @@
             <div class="row-sm-1 col-sm-offset-4">
                         <a href="<c:url value='/action/findPassword'/>" class="pull-right need-help">Find password!</a>
                         <a>/</a>
-                        <a href="#" class="pull-left need-help">Sign up</a>       
+                        <a href="<c:url value='/action/signup'/>" class="pull-left need-help">Sign up</a>       
                     </div>
                 
             </form>

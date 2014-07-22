@@ -27,7 +27,10 @@ public class CommandFactory {
 		case "/start":
 			target = new StartCommand();
 			break;
-						
+			
+		case "/signup":
+			target = new SignupCommand();
+			break;			
 		default:
 			target = new StartCommand();
 			break;
