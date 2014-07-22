@@ -240,7 +240,7 @@ public class MySqlCustomerDAO implements CustomerDAO {
 				while (rset.next()) {
 					int customerId = rset.getInt("customer_id");
 					String customerName = rset.getString("customer_name");
-					String customerConnection = rset.getString("customer_connection");//테스트위해서 바꾼것 다시 바꿔야함 커스터머브이오도 마찬가지
+					int customerConnection = rset.getInt("customer_connection");//테스트위해서 바꾼것 다시 바꿔야함 커스터머브이오도 마찬가지
 					boolean customerAutoLogin = rset.getBoolean("customer_auto_login");
 					String customerEmail = rset.getString("customer_email");
 					String customerPassword = rset.getString("customer_password");
@@ -297,7 +297,7 @@ public class MySqlCustomerDAO implements CustomerDAO {
 				while (rset.next()) {
 					int customerId = rset.getInt("customer_id");
 					String customerName = rset.getString("customer_name");
-					String customerConnection = rset.getString("customer_connection");//테스트위해서 바꾼것 다시 바꿔야함 커스터머브이오도 마찬가지
+					int customerConnection = rset.getInt("customer_connection");//테스트위해서 바꾼것 다시 바꿔야함 커스터머브이오도 마찬가지
 					boolean customerAutoLogin = rset.getBoolean("customer_auto_login");
 					String customerEmail = rset.getString("customer_email");
 					String customerPassword = rset.getString("customer_password");
