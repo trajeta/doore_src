@@ -436,7 +436,7 @@ public class MySqlVillageDAO implements VillageDAO {
 					
 			List<VillageVO> villageList = getVillageByCustID(customer_id);
 			List<ProductVO> productList = new ArrayList<ProductVO>();
-//			productList = null;
+			
 			System.out.println("확인2_1");
 			
 			try {
@@ -444,53 +444,38 @@ public class MySqlVillageDAO implements VillageDAO {
 				conn = DriverManager.getConnection(databaseURL, username, password);
 				stmt = conn.createStatement();
 
-				String sqlStr = "select distinct product_id from product_village where village_id in (";
+//				String sqlStr = "select distinct product_id from product_village where village_id in (";
+				
+				String sqlStr = "select * from products join product_detail on products.product_id = product_detail.product_id where products.product_id in (select distinct product_id from product_village where village_id in (";
 				
 				for(int i = 0 ; i < villageList.size() ; i++) {
 					sqlStr += villageList.get(i).getId();
 					if(i == villageList.size() - 1) {
-						sqlStr += ")";
+						sqlStr += "))";
 					}
 					else {
 						sqlStr += ",";
 					}
 				}			
 //				if(villageList != null) {
-					ResultSet rset1 = stmt.executeQuery(sqlStr);
+					ResultSet rset = stmt.executeQuery(sqlStr);
 //				}
 				System.out.println("확인2_2");
-				while (rset1.next()) { 
-					int product_id = rset1.getInt("product_id");
-					sqlStr = "select * from products join product_detail on products.product_id = product_detail.product_id where products.product_id = " + product_id;
-//					sqlStr = "select * from products where product_id = " + product_id;
-					ResultSet rset2 = stmt.executeQuery(sqlStr);
-					System.out.println("확인2_3");
-					while (rset2.next()) {
-						System.out.println(product_id);
-						System.out.println("확인2_3_1");
-						String product_name = rset2.getString("product_name");
-						System.out.println(product_name);
-						System.out.println("확인2_3_2");
-						byte[] product_picture = rset2.getBytes("product_picture");
-						System.out.println("확인2_3_3");
-						String product_registry = rset2.getString("product_registry");
-						System.out.println(product_registry);
-						System.out.println("확인2_3_4");
-						int category_id = rset2.getInt("category_id");
-						System.out.println(category_id);
-						System.out.println("확인2_3_5");
-						String detail_text_1 = rset2.getString("detail_filed_1");
-						String detail_text_2 = rset2.getString("detail_filed_2");
-						String detail_text_3 = rset2.getString("detail_filed_3");
-						String detail_decription = rset2.getString("detail_decription");
-						System.out.println("확인2_3_5");
-//						productList.add(new ProductVO(product_id, product_name, product_picture, product_registry, customer_id, category_id));
-						productList.add(new ProductVO(product_id, product_name, product_picture, product_registry, customer_id, category_id, detail_text_1, detail_text_2, detail_text_3, detail_decription));
-						System.out.println("확인2_3_6");
+				
+				
+				while (rset.next()) { 
+					int product_id = rset.getInt("product_id");
+					String product_name = rset.getString("product_name");
+					byte[] product_picture = rset.getBytes("product_picture");
+					String product_registry = rset.getString("product_registry");
+					int category_id = rset.getInt("category_id");
+					String detail_text_1 = rset.getString("detail_text_1");
+					String detail_text_2 = rset.getString("detail_text_2");
+					String detail_text_3 = rset.getString("detail_text_3");
+					String detail_decription = rset.getString("detail_decription");		
+//					productList.add(new ProductVO(product_id, product_name, product_picture, product_registry, customer_id, category_id));
+					productList.add(new ProductVO(product_id, product_name, product_picture, product_registry, customer_id, category_id, detail_text_1, detail_text_2, detail_text_3, detail_decription));
 					}
-					System.out.println("확인2_4");
-				}
-
 			} catch (SQLException ex) {
 				Logger.getLogger(MySqlVillageDAO.class.getName()).log(Level.SEVERE,
 						null, ex);
@@ -511,8 +496,7 @@ public class MySqlVillageDAO implements VillageDAO {
 							Level.SEVERE, null, ex);
 				}
 			}				
-			
-			
+					
 			return productList;
 		}
 }
