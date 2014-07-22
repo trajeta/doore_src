@@ -21,6 +21,9 @@ public class CommandFactory {
 		case "/main":
 			target = new MainCommand();
 			break;
+		case "/login":
+			target = new LoginCommand();
+			break;
 		case "/start":
 			target = new StartCommand();
 			break;
