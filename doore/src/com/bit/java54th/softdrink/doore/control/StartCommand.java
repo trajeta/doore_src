@@ -16,12 +16,12 @@ public class StartCommand implements Command {
 
 		CommandResult commandResult = null;
 	
-		int result = lendingPeriod(3);
-		request.setAttribute("lendingperiod", result);
-		result = getChangeSharingState(3, 1);
-		request.setAttribute("returncheck", result);
-		result = getReturnProduct(5);
-		request.setAttribute("returnproduct", result);
+//		int result = lendingPeriod(3);
+//		request.setAttribute("lendingperiod", result);
+//		result = getChangeSharingState(3, 1);
+//		request.setAttribute("returncheck", result);
+//		result = getReturnProduct(5);
+//		request.setAttribute("returnproduct", result);
 
 		commandResult = new CommandResult("/WEB-INF/index.jsp");
 		return commandResult;
