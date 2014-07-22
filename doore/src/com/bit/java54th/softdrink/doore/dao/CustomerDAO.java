@@ -7,5 +7,6 @@ public interface CustomerDAO {
 	public int createCustomer(String customerName, int customerConnection, String customerEmail, String customerPassword, int customerAutoLogin, String customerRegistry);
 	public int updateCustomer(int customerId, String customerName);
 	public int deleteCustomer(int customerId);
-
+	public CustomerVO findCustomerByNameEmail(String customer_email, String customer_name);
+	public CustomerVO findCustomerByLogin(String customer_email, String customer_password);
 }

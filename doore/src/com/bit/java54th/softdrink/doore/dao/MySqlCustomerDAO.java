@@ -213,4 +213,118 @@ public class MySqlCustomerDAO implements CustomerDAO {
 		}
 		return result;
 	}
+	
+	//로그인을 위한 이메일과 패스워드의 일치여부 확인
+		public CustomerVO findCustomerByLogin(String customer_email, String customer_password) {
+			Connection conn = null;
+			Statement stmt = null;
+			
+			CustomerVO customerVO = null;
+			
+			try {
+				
+				Class.forName("com.mysql.jdbc.Driver");
+				conn = DriverManager.getConnection(databaseURL, username, password);
+				stmt = conn.createStatement();
+				StringBuilder sqlStr = new StringBuilder();
+				
+				sqlStr.append("SELECT * FROM customers WHERE ");
+				sqlStr.append("STRCMP(customer_email, '").append(customer_email)
+						.append("') = 0 ");
+				sqlStr.append("AND STRCMP(customer_password, PASSWORD('")
+						.append(customer_password).append("')) = 0");
+						
+				
+				ResultSet rset = stmt.executeQuery(sqlStr.toString());
+
+				while (rset.next()) {
+					int customerId = rset.getInt("customer_id");
+					String customerName = rset.getString("customer_name");
+					String customerConnection = rset.getString("customer_connection");//테스트위해서 바꾼것 다시 바꿔야함 커스터머브이오도 마찬가지
+					boolean customerAutoLogin = rset.getBoolean("customer_auto_login");
+					String customerEmail = rset.getString("customer_email");
+					String customerPassword = rset.getString("customer_password");
+					String customerRegistryDay = rset.getString("customer_registry");
+					String customerLastUpdate = rset.getString("customer_last_update");
+					
+					customerVO = new CustomerVO(customerId, customerName, customerConnection, customerAutoLogin, customerEmail, customerPassword, customerRegistryDay, customerLastUpdate);
+				}
+
+			} catch (SQLException ex) {
+				Logger.getLogger(MySqlCustomerDAO.class.getName()).log(Level.SEVERE, null,
+						ex);
+			} catch (ClassNotFoundException ex2) {
+				Logger.getLogger(MySqlCustomerDAO.class.getName()).log(Level.SEVERE, null,
+						ex2);
+			} finally {
+				try {
+					if (stmt != null)
+						stmt.close();
+					if (conn != null)
+						conn.close();
+				} catch (SQLException ex) {
+					Logger.getLogger(MySqlCustomerDAO.class.getName()).log(Level.SEVERE,
+							null, ex);
+				}
+			}
+			
+			return customerVO;
+		}
+		
+		//이름과 이메일이 일치하는 사용자 찾기
+		public CustomerVO findCustomerByNameEmail(String customer_email, String customer_name) {
+			Connection conn = null;
+			Statement stmt = null;
+			
+			CustomerVO customerVO = null;
+			
+			try {
+				
+				Class.forName("com.mysql.jdbc.Driver");
+				conn = DriverManager.getConnection(databaseURL, username, password);
+				stmt = conn.createStatement();
+				StringBuilder sqlStr = new StringBuilder();
+				
+				sqlStr.append("SELECT * FROM customers WHERE ");
+				sqlStr.append("STRCMP(customer_email, '").append(customer_email)
+						.append("') = 0 ");
+				sqlStr.append("AND STRCMP(customer_name, '")
+						.append(customer_name).append("')) = 0");
+						
+				
+				ResultSet rset = stmt.executeQuery(sqlStr.toString());
+
+				while (rset.next()) {
+					int customerId = rset.getInt("customer_id");
+					String customerName = rset.getString("customer_name");
+					String customerConnection = rset.getString("customer_connection");//테스트위해서 바꾼것 다시 바꿔야함 커스터머브이오도 마찬가지
+					boolean customerAutoLogin = rset.getBoolean("customer_auto_login");
+					String customerEmail = rset.getString("customer_email");
+					String customerPassword = rset.getString("customer_password");
+					String customerRegistryDay = rset.getString("customer_registry");
+					String customerLastUpdate = rset.getString("customer_last_update");
+					
+					customerVO = new CustomerVO(customerId, customerName, customerConnection, customerAutoLogin, customerEmail, customerPassword, customerRegistryDay, customerLastUpdate);
+				}
+
+			} catch (SQLException ex) {
+				Logger.getLogger(MySqlCustomerDAO.class.getName()).log(Level.SEVERE, null,
+						ex);
+			} catch (ClassNotFoundException ex2) {
+				Logger.getLogger(MySqlCustomerDAO.class.getName()).log(Level.SEVERE, null,
+						ex2);
+			} finally {
+				try {
+					if (stmt != null)
+						stmt.close();
+					if (conn != null)
+						conn.close();
+				} catch (SQLException ex) {
+					Logger.getLogger(MySqlCustomerDAO.class.getName()).log(Level.SEVERE,
+							null, ex);
+				}
+			}
+			
+			return customerVO;
+		}
 }
