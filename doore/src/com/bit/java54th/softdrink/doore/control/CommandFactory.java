@@ -18,6 +18,9 @@ public class CommandFactory {
 		case "/sharing":
 			target = new SharingCommand();
 			break;
+		case "/main":
+			target = new MainCommand();
+			break;
 		case "/start":
 			target = new StartCommand();
 			break;
