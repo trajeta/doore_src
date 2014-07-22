@@ -1,5 +1,8 @@
+<%@page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page session="true" import="java.util.*"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -10,10 +13,10 @@
     <title>doore - Enjoy with your friends </title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
 
     <!-- Add custom CSS here -->
-    <link href="../css/modern-business.css" rel="stylesheet">
+    <link href="../css/modern-business.css" rel="stylesheet" type="text/css"/>
     <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
@@ -31,24 +34,23 @@
             </div><!-- row -->
             
             <div class="col-sm-3 col-sm-offset-4">
-                <form class="form-signin">
-                    <label class="checkbox pull-left">
-                         <input type="checkbox" value="remember-me"><i>Remember me</i>    
-                     </label>
-                <input type="text" class="form-control" placeholder="Email" required autofocus>
-                <input type="password" class="form-control" placeholder="Password" required>
+                <form name="login" class="form-signin" action="<c:url value='/action/login'/>" method="post">
+                <label class="checkbox pull-left">
+                <input type="checkbox" value="remember-me"><i>Remember me</i>
+                </label>
+                <input type="text" name="customer_email" class="form-control" placeholder="Email" required autofocus>
+                <input type="password" name="customer_password" class="form-control" placeholder="Password" required>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                    <div class="row-sm-1 col-sm-offset-4">
-                        <a href="#" class="pull-right need-help">Find password!</a>
-                        <a>/</a>
-                        <a href="#" class="pull-left need-help">Sign up</a>       
-                    </div>
                 
-                </form>
+                
+            <div class="row-sm-1 col-sm-offset-4">
+            <a href="<c:url value='/action/findPassword'/>" class="pull-right need-help">Foggoten my password!</a>
+            <a>/</a>
+            <a href="#" class="pull-right need-help">Sign up</a>                        
+            </div>
+            </form>
             </div>
             
-
-           
 		</div><!-- /container -->        
 	</div><!-- /headerwrap -->
 
