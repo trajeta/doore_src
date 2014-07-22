@@ -105,7 +105,7 @@
                 <a href="portfolio-item.html">
                     <img class="img-responsive" src="./img/product/work1.jpg">
                 </a>
-                <h3><a href="portfolio-item.html">${productList.name}</a>
+                <h3><a href="portfolio-item.html">${productVO.product_name}</a>
                 </h3>
                 <p></p>
             </div>
