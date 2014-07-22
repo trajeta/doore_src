@@ -21,10 +21,6 @@ public class LoginCommand implements Command {
 			HttpServletResponse response) throws ServletException, IOException {
 		CommandResult commandResult = null;
 		
-//		String customerPassword = request.getParameter("customerPassword");
-//		String customerEmail = request.getParameter("customerEmail");
-//		int customerConnection = Integer.parseInt(request.getParameter("customerConnection"));
-		
 		String customerEmail = request.getParameter("customer_email");
 		String customerPassword = request.getParameter("customer_password");
 		
@@ -37,10 +33,8 @@ public class LoginCommand implements Command {
 		}
 		else {
 			List<VillageVO> villageList = findVillageByCustID(result.getCustomerId());
-			System.out.println("확인1");
 			List<ProductVO> productList = findAllProductById(result.getCustomerId());
-			System.out.println(productList);
-			System.out.println("확인2");
+		
 			HttpSession session = request.getSession(false);
 			if (session != null) {
 				session.invalidate();
@@ -51,8 +45,7 @@ public class LoginCommand implements Command {
 				session.setAttribute("villageList", villageList);
 				request.setAttribute("productList", productList);
 			}
-			System.out.println("확인3");
-			commandResult = new CommandResult("/WEB-INF/view/main.jsp");
+			commandResult = new CommandResult("/WEB-INF/view/main.jsp");			
 		}
 		
 		return commandResult;
