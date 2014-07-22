@@ -32,7 +32,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
-                <a class="navbar-brand" href="goTest.jsp">doore</a>
+                <a class="navbar-brand" href="<c:url value='/action/main'/>">doore</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
