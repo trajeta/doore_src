@@ -43,11 +43,13 @@
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                 
                 
+ 
             <div class="row-sm-1 col-sm-offset-4">
-            <a href="<c:url value='/action/findPassword'/>" class="pull-right need-help">Foggoten my password!</a>
-            <a>/</a>
-            <a href="#" class="pull-right need-help">Sign up</a>                        
-            </div>
+                        <a href="<c:url value='/action/findPassword'/>" class="pull-right need-help">Find password!</a>
+                        <a>/</a>
+                        <a href="#" class="pull-left need-help">Sign up</a>       
+                    </div>
+                
             </form>
             </div>
             
