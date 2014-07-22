@@ -23,7 +23,7 @@ public class StartCommand implements Command {
 		result = getReturnProduct(5);
 		request.setAttribute("returnproduct", result);
 
-		commandResult = new CommandResult("/WEB-INF/view/start.jsp");
+		commandResult = new CommandResult("/WEB-INF/index.jsp");
 		return commandResult;
 	}
 	

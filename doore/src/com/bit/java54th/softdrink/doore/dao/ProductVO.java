@@ -29,6 +29,22 @@ public class ProductVO {
 		this.detail_text_3 = detail_text_3;
 		this.detail_decription=detail_decription;
 	}
+	
+	public ProductVO(int product_id, String product_name,
+			byte[] product_picture, String product_registry,
+			 int customer_id, int category_id
+			,String detail_text_1,String detail_text_2,String detail_text_3, String detail_decription) {
+		this.product_id = product_id;
+		this.product_name = product_name;
+		this.product_picture = product_picture;
+		this.product_registry = product_registry;
+		this.customer_id = customer_id;
+		this.category_id = category_id;
+		this.detail_text_1 = detail_text_1;
+		this.detail_text_2 = detail_text_2;
+		this.detail_text_3 = detail_text_3;
+		this.detail_decription=detail_decription;
+	}
 
 	public String getDetail_decription() {
 		return detail_decription;

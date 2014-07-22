@@ -1,52 +1,76 @@
 package com.bit.java54th.softdrink.doore.control;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.bit.java54th.softdrink.doore.dao.CustomerDAO;
 import com.bit.java54th.softdrink.doore.dao.CustomerVO;
 import com.bit.java54th.softdrink.doore.dao.DAOFactory;
+import com.bit.java54th.softdrink.doore.dao.ProductDAO;
+import com.bit.java54th.softdrink.doore.dao.ProductVO;
+import com.bit.java54th.softdrink.doore.dao.VillageDAO;
+import com.bit.java54th.softdrink.doore.dao.VillageVO;
 
 public class LoginCommand implements Command {
 	public CommandResult execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		CommandResult commandResult = null;
 		
-//		String customerPassword = request.getParameter("customerPassword");
-//		String customerEmail = request.getParameter("customerEmail");
-//		int customerConnection = Integer.parseInt(request.getParameter("customerConnection"));
+		String customerEmail = request.getParameter("customer_email");
+		String customerPassword = request.getParameter("customer_password");
 		
-//		String customerPassword = "1234";
-		String customerEmail = "sand1243@hanmail.net";
-//		int customerConnection = 1;
+		CustomerVO result = findCustomerByLogin(customerEmail, customerPassword);
 		
-		CustomerVO result = findCustomerByEmail(customerEmail);
-		
-		if (result == null)
-			commandResult = new CommandResult("/WEB-INF/view/success.jsp");
-		
-		request.setAttribute("login", result);
-
-		if (result.getCustomerEmail() == customerEmail) {
-			//				commandResult = new CommandResult(result.getCustomerPassword()); // 동일한 이메일을 찾아서 패스워드를 해당 객체안의 패스워드를 호출
-			commandResult = new CommandResult("/WEB-INF/view/success.jsp"); // test용
-		} else {
-			commandResult = new CommandResult("/WEB-INF/view/success.jsp"); // 동일한 이메일이 없을 경우 
+		if (result == null) {
+			HttpSession session = request.getSession(true);
+			session.invalidate();			
+			commandResult = new CommandResult("/WEB-INF/view/againLogin.jsp");
 		}
-	return commandResult;
-}
+		else {
+			List<VillageVO> villageList = findVillageByCustID(result.getCustomerId());
+			List<ProductVO> productList = findAllProductById(result.getCustomerId());
+		
+			HttpSession session = request.getSession(false);
+			if (session != null) {
+				session.invalidate();
+			}
+			session = request.getSession(true);
+			synchronized (session) {
+				session.setAttribute("customerVO", result);
+				session.setAttribute("villageList", villageList);
+				request.setAttribute("productList", productList);
+			}
+			commandResult = new CommandResult("/WEB-INF/view/main.jsp");			
+		}
+		
+		return commandResult;
+	}
 
-	public CustomerVO findCustomerByEmail(String customerEmail) {
+	public CustomerVO findCustomerByLogin(String customerEmail, String customerPassword) {
 		DAOFactory mysqlFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
 		CustomerDAO customerDAO = mysqlFactory.getCustomerDAO();
 		
-		return customerDAO.findCustomerByEmail(customerEmail);
+		return customerDAO.findCustomerByLogin(customerEmail, customerPassword);
 	}
 	
+	public List<VillageVO> findVillageByCustID(int customer_id) {
+		DAOFactory mysqlFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+		VillageDAO villageDAO = mysqlFactory.getVillageDAO();
+
+		return villageDAO.getVillageByCustID(customer_id);
+	}
 	
+	public List<ProductVO> findAllProductById(int customer_id) {
+		DAOFactory mysqlFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+		VillageDAO villageDAO = mysqlFactory.getVillageDAO();
+		
+		return villageDAO.findAllProductById(customer_id);
+	}
 }
 
 	
