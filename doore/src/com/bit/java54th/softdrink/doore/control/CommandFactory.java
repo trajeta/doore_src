@@ -5,6 +5,7 @@ public class CommandFactory {
 		Command target = null;
 
 		switch (pathName) {
+		
 		case "/product":
 			target = new ProductCommand();
 			break;
