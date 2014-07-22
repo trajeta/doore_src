@@ -436,9 +436,7 @@ public class MySqlVillageDAO implements VillageDAO {
 					
 			List<VillageVO> villageList = getVillageByCustID(customer_id);
 			List<ProductVO> productList = new ArrayList<ProductVO>();
-			
-			System.out.println("확인2_1");
-			
+					
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				conn = DriverManager.getConnection(databaseURL, username, password);
@@ -460,9 +458,7 @@ public class MySqlVillageDAO implements VillageDAO {
 //				if(villageList != null) {
 					ResultSet rset = stmt.executeQuery(sqlStr);
 //				}
-				System.out.println("확인2_2");
-				
-				
+							
 				while (rset.next()) { 
 					int product_id = rset.getInt("product_id");
 					String product_name = rset.getString("product_name");
