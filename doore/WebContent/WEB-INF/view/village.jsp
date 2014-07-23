@@ -18,6 +18,11 @@
     <!-- Add custom CSS here -->
     <link href="../css/modern-business.css" rel="stylesheet">
     <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        .pull-right {
+            margin : -6px
+        }    
+    </style>
 </head>
 
 <body>
@@ -85,10 +90,20 @@
                     <small> Collect & Share </small>
                 </h1>
                 <ol class="breadcrumb">
-                    <td>물품검색 drop down 창 영역
-                    </td>
-                    <td>물품검색 drop down 창 영역
-                    </td>
+                    <div class="pull-right">
+                        <input type="text" class="pull" id="search" value="" size="30"/>
+                            <button class="btn btn-default" type="button"><i class="fa fa-search" size="30"></i>
+                            </button>
+                    </div>
+                     
+                    <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Category <b class="caret"></b></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"> Book </a></li>
+                        <li><a href="#"> Car </a></li>
+                        <li><a href="#"> Passion </a></li>
+                </ul>
+                </li> 
                     
                 </ol>
             </div>
