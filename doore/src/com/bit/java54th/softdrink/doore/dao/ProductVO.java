@@ -18,6 +18,24 @@ public class ProductVO {
 
 	public ProductVO(int product_id, String product_name,
 			byte[] product_picture, String product_registry,
+			String product_last_update, int customer_id, int category_id) {
+		this.product_id = product_id;
+		this.product_name = product_name;
+		this.product_picture = product_picture;
+		this.product_registry = product_registry;
+		this.product_last_update = product_last_update;
+		this.customer_id = customer_id;
+		this.category_id = category_id;
+		this.detail_key1 = "";
+		this.detail_value1 = "";
+		this.detail_key2 = "";
+		this.detail_value2 = "";
+		this.detail_key3 = "";
+		this.detail_value3 = "";
+	}
+	
+	public ProductVO(int product_id, String product_name,
+			byte[] product_picture, String product_registry,
 			String product_last_update, int customer_id, int category_id
 			,String detail_key1,String detail_value1,String detail_key2,String detail_value2,String detail_key3,String detail_value3) {
 		this.product_id = product_id;
