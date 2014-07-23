@@ -22,5 +22,5 @@ public interface SharingDAO {
 	public int changeSharingState(int sharingID, int returnCheck);
 
 	public int returnProduct(int sharingID);
-	public SharingVO findSharingImpossible();
+	public SharingVO findSharingImpossible(int productID);
 }

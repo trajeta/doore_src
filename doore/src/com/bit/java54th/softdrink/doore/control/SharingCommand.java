@@ -33,7 +33,7 @@ public class SharingCommand implements Command {
 		System.out.println("customerName: " + customer.getCustomerName());
 		System.out.println("productName : " + product.getProduct_name());
 		System.out.println("****************");
-		SharingVO search = findSharingImpossible();
+		SharingVO search = findSharingImpossible(idInt);
 		if (search == null) {
 			commandResult = new CommandResult(
 					"/WEB-INF/view/sharingapplication.jsp");
@@ -57,10 +57,10 @@ public class SharingCommand implements Command {
 		return sharingDAO.findSharingByProductID(productID);
 	}
 
-	public SharingVO findSharingImpossible() {
+	public SharingVO findSharingImpossible(int productID) {
 		DAOFactory mysqlFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
 		SharingDAO sharingDAO = mysqlFactory.getSharingDAO();
-		return sharingDAO.findSharingImpossible();
+		return sharingDAO.findSharingImpossible(productID);
 
 	}
 

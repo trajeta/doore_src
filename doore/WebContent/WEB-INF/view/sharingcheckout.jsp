@@ -9,7 +9,7 @@
 <title>공유완료페이지</title>
 </head>
 <body>
-	<P>${login.customerName}님 공유신청이 완료되었습니다^^</P>
+	<P>${login.customerName}님공유신청이 완료되었습니다^^</P>
 	<p>insert result: ${result}</p>
 	<p>공유시작일: ${startday}</p>
 	<p>공유완료일: ${endday}</p>

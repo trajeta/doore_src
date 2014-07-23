@@ -444,7 +444,7 @@ public class MySqlSharingDAO implements SharingDAO {
 	}
 
 	@Override
-	public SharingVO findSharingImpossible() {
+	public SharingVO findSharingImpossible(int productID) {
 		Connection conn = null;
 		Statement stmt = null;
 
@@ -455,7 +455,8 @@ public class MySqlSharingDAO implements SharingDAO {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(databaseURL, username, password);
 			stmt = conn.createStatement();
-			String sqlStr = "select * from sharings where curdate() between date_format(sharing_start_day,'%Y%m%d') and date_format(sharing_end_day,'%Y%m%d')";
+			String sqlStr = "select * from sharings where curdate() between date_format(sharing_start_day,'%Y%m%d') and date_format(sharing_end_day,'%Y%m%d') and product_id ="
+					+ productID;
 			System.out.println(sqlStr);
 			ResultSet rset = stmt.executeQuery(sqlStr);
 
@@ -465,7 +466,6 @@ public class MySqlSharingDAO implements SharingDAO {
 				int returnCheck = rset.getInt("sharing_return_check");
 				String startDay = rset.getString("sharing_start_day");
 				String endDay = rset.getString("sharing_end_day");
-				int productID = rset.getInt("product_id");
 
 				sharingVO = new SharingVO(sharingID, startDay, endDay,
 						returnCheck, applicationID, productID);
