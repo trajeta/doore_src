@@ -37,9 +37,9 @@ public class MySqlVillageDAO implements VillageDAO {
 			while (rset.next()) { // list all the authors
 				int id = rset.getInt("village_id");
 				String name = rset.getString("village_name");
-				int count = rset.getInt("village_person_count");
+				String registry = rset.getString("village_registry");
 
-				villageList.add(new VillageVO(id, name, count));
+				villageList.add(new VillageVO(id, name, registry));
 			}
 
 		} catch (SQLException ex) {
