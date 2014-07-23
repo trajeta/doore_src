@@ -30,9 +30,9 @@ public class CommandFactory {
 		case "/signup":
 			target = new SignupCommand();
 			break;			
-		default:
-			target = new StartCommand();
-			break;
+//		default:
+//			target = new StartCommand();
+//			break;
 		}
 
 		return target;

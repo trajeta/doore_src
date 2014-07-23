@@ -14,4 +14,5 @@ public interface VillageDAO {
 	public List<CustomerVO> searchCustomer(String searchWord, int village_id);
 	public void trustLeader(int customer_id, int village_id);
 	public List<ProductVO> findAllProductById(int customer_id);
+	public VillageVO createVillageInstance(int village_id);
 }

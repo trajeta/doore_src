@@ -216,8 +216,14 @@ public class VillageCommand implements Command {
 			HttpServletResponse response)
 			throws javax.servlet.ServletException, java.io.IOException {
 		CommandResult commandResult;
-
-		commandResult = new CommandResult("/WEB-INF/view/");
+		
+		int village_id = Integer.parseInt(request.getParameter("village_id"));
+		
+		VillageVO villageVO = createVillageInstance(village_id);
+		
+		request.setAttribute("villageVO", villageVO);
+		
+		commandResult = new CommandResult("/WEB-INF/view/village.jsp");
 
 		return commandResult;
 	}
@@ -294,5 +300,13 @@ public class VillageCommand implements Command {
 		VillageDAO villageDAO = mysqlFactory.getVillageDAO();
 
 		villageDAO.trustLeader(customer_id, village_id);
+	}
+	
+	//마을 아이디를 통해서 마을의 객체생성
+	public VillageVO createVillageInstance(int village_id) {
+		DAOFactory mysqlFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+		VillageDAO villageDAO = mysqlFactory.getVillageDAO();
+		
+		return villageDAO.createVillageInstance(village_id);
 	}
 }
