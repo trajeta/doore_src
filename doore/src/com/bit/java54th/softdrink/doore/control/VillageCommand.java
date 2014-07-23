@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bit.java54th.softdrink.doore.dao.CustomerVO;
 import com.bit.java54th.softdrink.doore.dao.DAOFactory;
+import com.bit.java54th.softdrink.doore.dao.ProductDAO;
+import com.bit.java54th.softdrink.doore.dao.ProductVO;
 import com.bit.java54th.softdrink.doore.dao.VillageDAO;
 import com.bit.java54th.softdrink.doore.dao.VillageVO;
 
@@ -212,6 +214,7 @@ public class VillageCommand implements Command {
 		return commandResult;
 	}
 
+	//마을 페이지
 	public CommandResult doView(HttpServletRequest request,
 			HttpServletResponse response)
 			throws javax.servlet.ServletException, java.io.IOException {
@@ -220,7 +223,9 @@ public class VillageCommand implements Command {
 		int village_id = Integer.parseInt(request.getParameter("village_id"));
 		
 		VillageVO villageVO = createVillageInstance(village_id);
+		List<ProductVO> productList = findProductByVillageID(village_id);
 		
+		request.setAttribute("productList", productList);
 		request.setAttribute("villageVO", villageVO);
 		
 		commandResult = new CommandResult("/WEB-INF/view/village.jsp");
@@ -308,5 +313,12 @@ public class VillageCommand implements Command {
 		VillageDAO villageDAO = mysqlFactory.getVillageDAO();
 		
 		return villageDAO.createVillageInstance(village_id);
+	}
+	
+	public List<ProductVO> findProductByVillageID(int village_id) {
+		DAOFactory mysqlFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+		ProductDAO productDAO = mysqlFactory.getProductDAO();
+		
+		return productDAO.findProductByVillageID(village_id);
 	}
 }
