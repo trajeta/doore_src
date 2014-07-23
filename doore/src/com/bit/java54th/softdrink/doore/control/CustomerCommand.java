@@ -84,7 +84,6 @@ public class CustomerCommand implements Command {
 		
 		int result = updateCustomer(customerVO.getCustomerId(), customerName);
 		request.setAttribute("update", result);
-		
 		if (result == 0) {
 			commandResult = new CommandResult("/WEB-INF/view/main.jsp");
 		} else {
@@ -97,18 +96,32 @@ public class CustomerCommand implements Command {
 
 	public CommandResult doRemove(HttpServletRequest request, HttpServletResponse response) throws javax.servlet.ServletException, java.io.IOException {
 		CommandResult commandResult;	
-//		int customerId = Integer.parseInt(request.getParameter("customerId"));
-
-		int customerId = 13;
+		HttpSession session = request.getSession(true);
+		CustomerVO customerVO = (CustomerVO) session.getAttribute("customerVO");
 		
-		int result = removeCustomer(customerId);
-		request.setAttribute("remove", result);
-			
-		if (result == 0) {
-			commandResult = new CommandResult("/WEB-INF/view/success.jsp");
-		} else {
-			commandResult = new CommandResult("/WEB-INF/view/success.jsp");	
+		String customerPassword = request.getParameter("customerPassword");
+		String customerEmail = request.getParameter("customerEmail");
+		System.out.println(customerPassword);
+		System.out.println(customerEmail);
+		String email = customerVO.getCustomerEmail();
+		String password = customerVO.getCustomerPassword();
+		System.out.println(email);
+		System.out.println(password);
+		
+		if(customerPassword == password && customerEmail == email) {
+			int result = removeCustomer(customerVO.getCustomerId());
+			request.setAttribute("remove", result);
+				
+			if (result == 0) {
+				commandResult = new CommandResult("/WEB-INF/view/success.jsp");
+			} else {
+				commandResult = new CommandResult("/WEB-INF/view/success.jsp");	
+			}
+		} else { 
+			commandResult = new CommandResult("/index.html");
 		}
+		
+		
 		
 		return commandResult;		
 	}

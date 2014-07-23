@@ -48,7 +48,7 @@ left
 							<a href="#">내정보</a>
 						</div>
 						<div class="pull-left">
-							<a href="#">회원탈퇴</a>
+							<a href = 'remove'>회원탈퇴</a>
 						</div>
 					</h4>
 					<div class="widget-body">

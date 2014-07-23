@@ -34,6 +34,9 @@ public class CommandFactory {
 		case "/mypage":
 			target = new MypageCommand();
 			break;
+		case "/remove":
+			target = new RemoveCommand();
+			break;
 		default:
 			target = new StartCommand();
 			break;
