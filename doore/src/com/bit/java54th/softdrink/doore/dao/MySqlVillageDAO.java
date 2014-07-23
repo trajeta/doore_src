@@ -470,7 +470,7 @@ public class MySqlVillageDAO implements VillageDAO {
 					String detail_text_3 = rset.getString("detail_text_3");
 					String detail_decription = rset.getString("detail_decription");		
 //					productList.add(new ProductVO(product_id, product_name, product_picture, product_registry, customer_id, category_id));
-					productList.add(new ProductVO(product_id, product_name, product_picture, product_registry, customer_id, category_id, detail_text_1, detail_text_2, detail_text_3, detail_decription));
+//					productList.add(new ProductVO(product_id, product_name, product_picture, product_registry, customer_id, category_id, detail_text_1, detail_text_2, detail_text_3, detail_decription));
 					}
 			} catch (SQLException ex) {
 				Logger.getLogger(MySqlVillageDAO.class.getName()).log(Level.SEVERE,

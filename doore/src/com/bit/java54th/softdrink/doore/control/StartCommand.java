@@ -20,7 +20,7 @@ public class StartCommand implements Command {
 		HttpSession session = request.getSession(true);
 		session.setAttribute("login", findCustomerById(1));
 		System.out.println("고객이름: " + findCustomerById(1).getCustomerName());
-		commandResult = new CommandResult("/WEB-INF/view/sharingstart.jsp");
+		commandResult = new CommandResult("/WEB-INF/index.jsp");
 		return commandResult;
 	}
 
