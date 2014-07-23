@@ -3,12 +3,12 @@ package com.bit.java54th.softdrink.doore.dao;
 public class VillageVO {
 	private int id;
 	private String name;
-	private int count;
+	private String registry;
 
-	public VillageVO(int id, String name, int count) {
+	public VillageVO(int id, String name, String registry) {
 		this.id = id;
 		this.name = name;
-		this.count = count;		
+		this.registry = registry;		
 	}
 
 	public int getId() {
@@ -27,12 +27,12 @@ public class VillageVO {
 		this.name = name;
 	}
 
-	public int getCount() {
-		return count;
+	public String getRegistry() {
+		return registry;
 	}
 
-	public void setCount(int count) {
-		this.count = count;
+	public void setRegistry(String registry) {
+		this.registry = registry;
 	}
 	
 }
