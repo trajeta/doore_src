@@ -47,13 +47,15 @@ public class MySqlProductDAO implements ProductDAO {
 				String last_update = rset.getString("product_last_update");
 				int cutomer_id = rset.getInt("customer_id");
 				int category_id = rset.getInt("category_id");
-				String detail_text_1 = rset.getString("detail_text_1");
-				String detail_text_2 = rset.getString("detail_text_2");
-				String detail_text_3 = rset.getString("detail_text_3");
-				String detail_decription = rset.getString("detail_decription");
+				String detail_key1 = rset.getString("detail_key1");
+				String detail_value1 = rset.getString("detail_value1");
+				String detail_key2 = rset.getString("detail_key2");
+				String detail_value2 = rset.getString("detail_value2");
+				String detail_key3 = rset.getString("detail_key3");
+				String detail_value3 = rset.getString("detail_value3");
 			
-				productList.add(new ProductVO(id,name,picture,registry,last_update,cutomer_id,category_id,detail_text_1
-						,detail_text_2,detail_text_3,detail_decription));
+				productList.add(new ProductVO(id,name,picture,registry,last_update,cutomer_id,category_id,detail_key1
+						,detail_value1,detail_key2,detail_value2,detail_key3,detail_value3));
 				
 			}
 		} catch (SQLException ex) {
@@ -102,13 +104,15 @@ public class MySqlProductDAO implements ProductDAO {
 				String last_update = rset.getString("product_last_update");
 				int cutomer_id = rset.getInt("customer_id");
 				int category_id = rset.getInt("category_id");
-				String detail_text_1 = rset.getString("detail_text_1");
-				String detail_text_2 = rset.getString("detail_text_2");
-				String detail_text_3 = rset.getString("detail_text_3");
-				String detail_decription = rset.getString("detail_decription");
-			
-				productList.add(new ProductVO(id,name,picture,registry,last_update,cutomer_id,category_id,detail_text_1
-						,detail_text_2,detail_text_3,detail_decription));
+				String detail_key1 = rset.getString("detail_key1");
+				String detail_value1 = rset.getString("detail_value1");
+				String detail_key2 = rset.getString("detail_key2");
+				String detail_value2 = rset.getString("detail_value2");
+				String detail_key3 = rset.getString("detail_key3");
+				String detail_value3 = rset.getString("detail_value3");
+				
+				productList.add(new ProductVO(id,name,picture,registry,last_update,cutomer_id,category_id,detail_key1
+						,detail_value1,detail_key2,detail_value2,detail_key3,detail_value3));
 				
 			}
 		} catch (SQLException ex) {
@@ -150,11 +154,7 @@ public class MySqlProductDAO implements ProductDAO {
 			while (rset.next()) { // list all the authors
 				int id = rset.getInt("category_id");
 				String name = rset.getString("category_name");
-				String category_text1 = rset.getString("category_text1");
-				String category_text2 = rset.getString("category_text2");
-				String category_text3 = rset.getString("category_text3");
-			
-				CategoryVO = new CategoryVO(id,name,category_text1,category_text2,category_text3);
+				CategoryVO = new CategoryVO(id,name);
 				
 			}
 		} catch (SQLException ex) {
@@ -200,13 +200,15 @@ public class MySqlProductDAO implements ProductDAO {
 				String last_update = rset.getString("product_last_update");
 				int cutomer_id = rset.getInt("customer_id");
 				int category_id = rset.getInt("category_id");
-				String detail_text_1 = rset.getString("detail_text_1");
-				String detail_text_2 = rset.getString("detail_text_2");
-				String detail_text_3 = rset.getString("detail_text_3");
-				String detail_decription = rset.getString("detail_decription");
-			
-				productList.add(new ProductVO(id,name,picture,registry,last_update,cutomer_id,category_id,detail_text_1
-						,detail_text_2,detail_text_3,detail_decription));
+				String detail_key1 = rset.getString("detail_key1");
+				String detail_value1 = rset.getString("detail_value1");
+				String detail_key2 = rset.getString("detail_key2");
+				String detail_value2 = rset.getString("detail_value2");
+				String detail_key3 = rset.getString("detail_key3");
+				String detail_value3 = rset.getString("detail_value3");
+				
+				productList.add(new ProductVO(id,name,picture,registry,last_update,cutomer_id,category_id,detail_key1
+						,detail_value1,detail_key2,detail_value2,detail_key3,detail_value3));
 				
 			}
 		} catch (SQLException ex) {
@@ -254,13 +256,15 @@ public class MySqlProductDAO implements ProductDAO {
 				String last_update = rset.getString("product_last_update");
 				int cutomer_id = rset.getInt("customer_id");
 				int category_id = rset.getInt("category_id");
-				String detail_text_1 = rset.getString("detail_text_1");
-				String detail_text_2 = rset.getString("detail_text_2");
-				String detail_text_3 = rset.getString("detail_text_3");
-				String detail_decription = rset.getString("detail_decription");
-			
-				productVO = new ProductVO(id,name,picture,registry,last_update,cutomer_id,category_id,detail_text_1
-						,detail_text_2,detail_text_3,detail_decription);
+				String detail_key1 = rset.getString("detail_key1");
+				String detail_value1 = rset.getString("detail_value1");
+				String detail_key2 = rset.getString("detail_key2");
+				String detail_value2 = rset.getString("detail_value2");
+				String detail_key3 = rset.getString("detail_key3");
+				String detail_value3 = rset.getString("detail_value3");
+				
+				productVO = new ProductVO(id,name,picture,registry,last_update,cutomer_id,category_id,detail_key1
+						,detail_value1,detail_key2,detail_value2,detail_key3,detail_value3);
 				
 			}
 		} catch (SQLException ex) {
@@ -286,15 +290,13 @@ public class MySqlProductDAO implements ProductDAO {
 	
 	@Override
 	public int createProduct(String product_name, byte[] product_picture,int customer_id,int category_id,
-			String detail_text_1,String detail_text_2, String detail_text_3, String detail_decription,
-			int village_id) {
+			String detail_key1,String detail_value1,String detail_key2,String detail_value2,String detail_key3,String detail_value3,int village_id) {
 		Connection conn = null;
 		Statement stmt = null;
 		int success1 = 0, success2=0,success3=0;
 		int product_id=0;
 		ProductVO productVO = null;
 		ResultSet rset;
-		village_id=2;
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver");
@@ -324,8 +326,14 @@ public class MySqlProductDAO implements ProductDAO {
 				conn.rollback();
 			}
 			
-			sqlStr = "insert into product_detail(product_id,detail_text_1,detail_text_2,detail_text_3,detail_decription) values ("
-					+product_id+",'"+detail_text_1+"','"+detail_text_2+"','"+detail_text_3+"','"+detail_decription+"')";
+			sqlStr = "insert into product_detail(product_id,detail_key,detail_value) values ("
+					+product_id+",'"+detail_key1+"','"+detail_value1+"')";
+			success3 = stmt.executeUpdate(sqlStr);
+			sqlStr = "insert into product_detail(product_id,detail_key,detail_value) values ("
+					+product_id+",'"+detail_key2+"','"+detail_value2+"')";
+			success3 = stmt.executeUpdate(sqlStr);
+			sqlStr = "insert into product_detail(product_id,detail_key,detail_value) values ("
+					+product_id+",'"+detail_key3+"','"+detail_value3+"')";
 			success3 = stmt.executeUpdate(sqlStr);
 			System.out.println("success3 : "+success3);
 			if(success1==1 && success2==1&&success3==1){
@@ -354,7 +362,7 @@ public class MySqlProductDAO implements ProductDAO {
 			}
 		}
 		if(success1 ==1 && success2==1&&success3==1){
-			return success1;
+			return product_id;
 			}else {
 				return 0;
 			}
@@ -362,8 +370,7 @@ public class MySqlProductDAO implements ProductDAO {
 	}
 	@Override
 	public int createProduct(String product_name, byte[] product_picture,int customer_id,int category_id,
-			String detail_text_1,String detail_text_2, String detail_text_3, String detail_decription
-			) {
+			String detail_key1,String detail_value1,String detail_key2,String detail_value2,String detail_key3,String detail_value3) {
 		Connection conn = null;
 		Statement stmt = null;
 		int success1 = 0, success2=0,success3=0;
@@ -385,9 +392,14 @@ public class MySqlProductDAO implements ProductDAO {
 			
 		
 			
-			sqlStr = "insert into product_detail(product_id,detail_text_1,detail_text_2,detail_text_3,detail_decription) values ("
-					+product_id+",'"+detail_text_1+"','"+detail_text_2+"','"+detail_text_3+"','"+detail_decription+"')";
+			sqlStr = "insert into product_detail(product_id,detail_key,detail_value) values ("
+					+product_id+",'"+detail_key1+"','"+detail_value1+"')";
 			success3 = stmt.executeUpdate(sqlStr);
+			sqlStr = "insert into product_detail(product_id,detail_key,detail_value) values ("
+					+product_id+",'"+detail_key2+"','"+detail_value2+"')";
+			success3 = stmt.executeUpdate(sqlStr);
+			sqlStr = "insert into product_detail(product_id,detail_key,detail_value) values ("
+					+product_id+",'"+detail_key3+"','"+detail_value3+"')";
 			System.out.println("success3 : "+success3);
 			if(success1==1 && success2==1&&success3==1){
 				conn.commit();	
@@ -423,8 +435,8 @@ public class MySqlProductDAO implements ProductDAO {
 	}
 
 	@Override
-	public int updateProduct(int product_id, String product_name, byte[] product_picture,String detail_text_1,String detail_text_2,String detail_text_3,
-			String detail_decription, int village_id) {
+	public int updateProduct(int product_id, String product_name, byte[] product_picture,
+			String detail_key,String detail_value,String detail_key2,String detail_value2,String detail_key3,String detail_value3,int village_id) {
 		Connection conn = null;
 		Statement stmt = null;
 		int success1 = 0, success2 = 0, success3= 0;
@@ -437,8 +449,8 @@ public class MySqlProductDAO implements ProductDAO {
 			String sqlStr = "update products set product_name = '"+product_name+"',product_picture="+product_picture+" where product_id="+product_id+";";
 			success1 = stmt.executeUpdate(sqlStr);
 			
-			sqlStr= "update product_detail set detail_text_1 = '"+detail_text_1+"',detail_text_2='"+detail_text_2
-				+"',detail_text_3='"+detail_text_3+"',detail_decription='"+detail_decription+"' where product_id="+product_id+";";
+			sqlStr= "update product_detail set detail_key = '"+detail_key+"',detail_value='"+detail_value
+				+" where product_id="+product_id+";";
 			success2 = stmt.executeUpdate(sqlStr);
 			
 			sqlStr= "update product_village set product_id="+product_id+",village_id="+village_id+" where product_id="+product_id+";";
