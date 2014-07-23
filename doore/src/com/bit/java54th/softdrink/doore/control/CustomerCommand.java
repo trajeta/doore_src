@@ -46,12 +46,11 @@ public class CustomerCommand implements Command {
 
 		int result = addCustomer (customerName, customerConnection,  customerEmail, customerPassword, customerAutoLogin, customerRegistry) ;
 		request.setAttribute("customer", result);
-		System.out.println(result);
 		
 		if (result == 0) { 
 		commandResult = new CommandResult("/WEB-INF/view/main.jsp");
 		} else {
-			commandResult = new CommandResult("/WEB-INF/index.jsp");
+			commandResult = new CommandResult("/index.html");
 		}
 		
 	

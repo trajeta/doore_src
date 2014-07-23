@@ -67,7 +67,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a href="https://trello.com/b/Qj8TcNJB/soft-drink">${customerVO.customerName} 님</a>
+                    <li><a href="<c:url value='/action/mypage'/>" class='pull-left need-help' > ${customerVO.customerName} 님</a>
                     </li>
                 </ul>
             </div>

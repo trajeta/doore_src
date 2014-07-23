@@ -42,10 +42,15 @@
 					<div class="widget-body">
 						<div class="center-align">
 							<form class="form-horizontal form-signin-signup" action="<c:url value='/action/customer?todo=add'/>" method="post">
+								
+				
+								
 								<input type="text" name="customerEmail" placeholder="Email">  
 								<input type="text" name="customerName" placeholder="Name">
 								<input type="password" name="customerPassword" placeholder="Password">
 								<input type="text" name="customerConnection" value="1">
+								
+								
 								<div>
 									<input type="submit" value="Sign up"
 										class="btn btn-primary btn-large">
