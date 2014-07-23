@@ -407,7 +407,8 @@ public class MySqlSharingDAO implements SharingDAO {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(databaseURL, username, password);
 			stmt = conn.createStatement();
-			String sqlStr = "select s.sharing_id,s.sharing_application_id,s.sharing_return_check,s.sharing_start_day,s.sharing_end_day,p.product_id from sharings as s join products as p on s.product_id = p.product_id where p.product_id ="+productID;
+			String sqlStr = "select s.sharing_id,s.sharing_application_id,s.sharing_return_check,s.sharing_start_day,s.sharing_end_day,p.product_id from sharings as s join products as p on s.product_id = p.product_id where p.product_id ="
+					+ productID;
 			System.out.println(sqlStr);
 			ResultSet rset = stmt.executeQuery(sqlStr);
 			while (rset.next()) { // list all the authors
@@ -416,7 +417,7 @@ public class MySqlSharingDAO implements SharingDAO {
 				int returnCheck = rset.getInt("sharing_return_check");
 				String startDay = rset.getString("sharing_start_day");
 				String endDay = rset.getString("sharing_end_day");
-				
+
 				sharings.add(new SharingVO(sharingID, startDay, endDay,
 						returnCheck, applicationID, productID));
 			}
@@ -440,6 +441,55 @@ public class MySqlSharingDAO implements SharingDAO {
 		}
 
 		return sharings;
+	}
+
+	@Override
+	public SharingVO findSharingImpossible() {
+		Connection conn = null;
+		Statement stmt = null;
+
+		SharingVO sharingVO = null;
+
+		try {
+
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(databaseURL, username, password);
+			stmt = conn.createStatement();
+			String sqlStr = "select * from sharings where curdate() between date_format(sharing_start_day,'%Y%m%d') and date_format(sharing_end_day,'%Y%m%d')";
+			System.out.println(sqlStr);
+			ResultSet rset = stmt.executeQuery(sqlStr);
+
+			while (rset.next()) { // list all the authors
+				int sharingID = rset.getInt("sharing_id");
+				int applicationID = rset.getInt("sharing_application_id");
+				int returnCheck = rset.getInt("sharing_return_check");
+				String startDay = rset.getString("sharing_start_day");
+				String endDay = rset.getString("sharing_end_day");
+				int productID = rset.getInt("product_id");
+
+				sharingVO = new SharingVO(sharingID, startDay, endDay,
+						returnCheck, applicationID, productID);
+
+			}
+
+		} catch (SQLException ex) {
+			Logger.getLogger(MySqlSharingDAO.class.getName()).log(Level.SEVERE,
+					null, ex);
+		} catch (ClassNotFoundException ex2) {
+			Logger.getLogger(MySqlSharingDAO.class.getName()).log(Level.SEVERE,
+					null, ex2);
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException ex) {
+				Logger.getLogger(MySqlSharingDAO.class.getName()).log(
+						Level.SEVERE, null, ex);
+			}
+		}
+		return sharingVO;
 	}
 
 }
