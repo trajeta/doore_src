@@ -157,10 +157,11 @@ public class MySqlCustomerDAO implements CustomerDAO {
 			conn = DriverManager.getConnection(databaseURL, username, password);
 			stmt = conn.createStatement();
 			
-			String sqlStr = "UPDATE customers SET customer_name ='"
+			String sqlStr = "UPDATE customers SET customer_name='"
 			+ customerName + "' WHERE customer_id = " + customerId;
 			System.out.println(sqlStr);
 			result = stmt.executeUpdate(sqlStr);
+			
 			
 		} catch (SQLException ex) {
 		Logger.getLogger(MySqlCustomerDAO.class.getName()).log(Level.SEVERE, null, ex);

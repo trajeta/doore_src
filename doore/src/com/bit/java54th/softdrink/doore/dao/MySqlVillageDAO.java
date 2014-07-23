@@ -493,4 +493,49 @@ public class MySqlVillageDAO implements VillageDAO {
 				
 		return productList;
 	}
+	
+	//마을 아이디를 통해서 마을의 객체생성
+	public VillageVO createVillageInstance(int village_id) {
+		Connection conn = null;
+		Statement stmt = null;
+		
+		VillageVO villageVO = null;
+		
+		try {
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(databaseURL, username, password);
+			stmt = conn.createStatement();
+					
+			String sqlStr = "select * from villages where village_id = " + village_id;
+					
+			ResultSet rset = stmt.executeQuery(sqlStr);
+
+			while (rset.next()) {
+				String village_name = rset.getString("village_name");
+				String village_registry = rset.getString("village_registry");
+				
+				villageVO = new VillageVO(village_id, village_name, village_registry);
+			}
+			
+		} catch (SQLException ex) {
+			Logger.getLogger(MySqlVillageDAO.class.getName()).log(Level.SEVERE,
+					null, ex);
+		} catch (ClassNotFoundException ex2) {
+			Logger.getLogger(MySqlVillageDAO.class.getName()).log(Level.SEVERE,
+					null, ex2);
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException ex) {
+				Logger.getLogger(MySqlVillageDAO.class.getName()).log(
+						Level.SEVERE, null, ex);
+			}
+		}
+		
+		return villageVO;
+	}
 }

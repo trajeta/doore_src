@@ -29,6 +29,7 @@ public class CommandFactory {
 			break;	
 		case "/signup":
 			target = new SignupCommand();
+
 			break;
 		case "/mypage":
 			target = new MypageCommand();
@@ -37,7 +38,6 @@ public class CommandFactory {
 			target = new StartCommand();
 			break;
 		}
-
 		return target;
 	}
 }

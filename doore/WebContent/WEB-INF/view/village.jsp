@@ -22,7 +22,7 @@
         .pull-right {
             margin : -6px
         }    
-    </style>    
+    </style>
 </head>
 
 <body>
@@ -72,7 +72,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a href="<c:url value='/action/mypage'/>" class='pull-left need-help' > ${customerVO.customerName} 님</a>
+                    <li><a href="https://trello.com/b/Qj8TcNJB/soft-drink">${customerVO.customerName} 님</a>
                     </li>
                 </ul>
             </div>
@@ -86,11 +86,11 @@
         <div class="row">
 
             <div class="col-lg-12">
-                <h1 class="page-header">${customerVO.customerName}
+                <h1 class="page-header">${villageVO.name}
                     <small> Collect & Share </small>
                 </h1>
                 <ol class="breadcrumb">
-                     <div class="pull-right">
+                    <div class="pull-right">
                         <input type="text" class="pull" id="search" value="" size="30"/>
                             <button class="btn btn-default" type="button"><i class="fa fa-search" size="30"></i>
                             </button>

@@ -1,7 +1,9 @@
 package com.bit.java54th.softdrink.doore.control;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.bit.java54th.softdrink.doore.dao.CustomerDAO;
 import com.bit.java54th.softdrink.doore.dao.CustomerVO;
@@ -73,19 +75,20 @@ public class CustomerCommand implements Command {
 	
 	public CommandResult doUpdate(HttpServletRequest request, HttpServletResponse response) throws javax.servlet.ServletException, java.io.IOException {
 		CommandResult commandResult = null;
-//		int customerId = Integer.parseInt(request.getParameter("customerId"));
-//		String customerName = request.getParameter("customerName");
+		HttpSession session = request.getSession(true);
+		CustomerVO customerVO = (CustomerVO) session.getAttribute("customerVO");
+		String customerName = request.getParameter("customerName");
 		
-		int customerId = 14;
-		String customerName = "김말순";
+//		int customerId = 14;
+//		String customerName = "김말순";
 		
-		int result = updateCustomer(customerId, customerName);
+		int result = updateCustomer(customerVO.getCustomerId(), customerName);
 		request.setAttribute("update", result);
 		
 		if (result == 0) {
-			commandResult = new CommandResult("/WEB-INF/view/success.jsp");
+			commandResult = new CommandResult("/WEB-INF/view/main.jsp");
 		} else {
-			commandResult = new CommandResult("/WEB-INF/view/success.jsp");	
+			commandResult = new CommandResult("/WEB-INF/view/main.jsp");	
 		}
 
 		return commandResult;
