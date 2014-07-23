@@ -37,9 +37,9 @@ public class MySqlVillageDAO implements VillageDAO {
 			while (rset.next()) { // list all the authors
 				int id = rset.getInt("village_id");
 				String name = rset.getString("village_name");
-				int count = rset.getInt("village_person_count");
+				String registry = rset.getString("village_registry");
 
-				villageList.add(new VillageVO(id, name, count));
+				villageList.add(new VillageVO(id, name, registry));
 			}
 
 		} catch (SQLException ex) {
@@ -430,69 +430,67 @@ public class MySqlVillageDAO implements VillageDAO {
 	}
 	
 	//해당 아이디의 모든 물품 조회
-		public List<ProductVO> findAllProductById(int customer_id) {
-			Connection conn = null;
-			Statement stmt = null;
-					
-			List<VillageVO> villageList = getVillageByCustID(customer_id);
-			List<ProductVO> productList = new ArrayList<ProductVO>();
-					
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				conn = DriverManager.getConnection(databaseURL, username, password);
-				stmt = conn.createStatement();
+	public List<ProductVO> findAllProductById(int customer_id) {
+		Connection conn = null;
+		Statement stmt = null;
+				
+		List<VillageVO> villageList = getVillageByCustID(customer_id);
+		List<ProductVO> productList = new ArrayList<ProductVO>();
+				
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(databaseURL, username, password);
+			stmt = conn.createStatement();
 
-//				String sqlStr = "select distinct product_id from product_village where village_id in (";
-				
-				String sqlStr = "select * from products join product_detail on products.product_id = product_detail.product_id where products.product_id in (select distinct product_id from product_village where village_id in (";
-				
-				for(int i = 0 ; i < villageList.size() ; i++) {
-					sqlStr += villageList.get(i).getId();
-					if(i == villageList.size() - 1) {
-						sqlStr += "))";
-					}
-					else {
-						sqlStr += ",";
-					}
-				}			
-//				if(villageList != null) {
-					ResultSet rset = stmt.executeQuery(sqlStr);
-//				}
-							
-				while (rset.next()) { 
-					int product_id = rset.getInt("product_id");
-					String product_name = rset.getString("product_name");
-					byte[] product_picture = rset.getBytes("product_picture");
-					String product_registry = rset.getString("product_registry");
-					int category_id = rset.getInt("category_id");
-					String detail_text_1 = rset.getString("detail_text_1");
-					String detail_text_2 = rset.getString("detail_text_2");
-					String detail_text_3 = rset.getString("detail_text_3");
-					String detail_decription = rset.getString("detail_decription");		
-//					productList.add(new ProductVO(product_id, product_name, product_picture, product_registry, customer_id, category_id));
-					productList.add(new ProductVO(product_id, product_name, product_picture, product_registry, customer_id, category_id, detail_text_1, detail_text_2, detail_text_3, detail_decription));
-					}
-			} catch (SQLException ex) {
-				Logger.getLogger(MySqlVillageDAO.class.getName()).log(Level.SEVERE,
-						null, ex);
-			} catch (ClassNotFoundException ex2) {
-				Logger.getLogger(MySqlVillageDAO.class.getName()).log(Level.SEVERE,
-						null, ex2);
-			} catch (Exception ex) {
-				Logger.getLogger(MySqlVillageDAO.class.getName()).log(Level.SEVERE,
-						null, ex);
-			} finally {
-				try {
-					if (stmt != null)
-						stmt.close();
-					if (conn != null)
-						conn.close();
-				} catch (SQLException ex) {
-					Logger.getLogger(MySqlVillageDAO.class.getName()).log(
-							Level.SEVERE, null, ex);
+//			String sqlStr = "select distinct product_id from product_village where village_id in (";
+			
+			String sqlStr = "select * from products where product_id in (select distinct product_id from product_village where village_id in (";
+			
+			for(int i = 0 ; i < villageList.size() ; i++) {
+				sqlStr += villageList.get(i).getId();
+				if(i == villageList.size() - 1) {
+					sqlStr += "))";
 				}
-			}				
+				else {
+					sqlStr += ",";
+				}
+			}			
+//			if(villageList != null) {
+				ResultSet rset = stmt.executeQuery(sqlStr);
+//			}
+						
+			while (rset.next()) { 
+				int product_id = rset.getInt("product_id");
+				String product_name = rset.getString("product_name");
+				byte[] product_picture = rset.getBytes("product_picture");
+				String product_registry = rset.getString("product_registry");
+				String product_last_update = rset.getString("product_last_update");
+				int category_id = rset.getInt("category_id");
 					
-			return productList;
-		}
+				productList.add(new ProductVO(product_id, product_name, product_picture, product_registry, product_last_update, customer_id, category_id));
+//				productList.add(new ProductVO(product_id, product_name, product_picture, product_registry, product_last_update, customer_id, category_id, detail_text_1, detail_text_2, detail_text_3, detail_decription));
+				}
+		} catch (SQLException ex) {
+			Logger.getLogger(MySqlVillageDAO.class.getName()).log(Level.SEVERE,
+					null, ex);
+		} catch (ClassNotFoundException ex2) {
+			Logger.getLogger(MySqlVillageDAO.class.getName()).log(Level.SEVERE,
+					null, ex2);
+		} catch (Exception ex) {
+			Logger.getLogger(MySqlVillageDAO.class.getName()).log(Level.SEVERE,
+					null, ex);
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException ex) {
+				Logger.getLogger(MySqlVillageDAO.class.getName()).log(
+						Level.SEVERE, null, ex);
+			}
+		}				
+				
+		return productList;
+	}
 }

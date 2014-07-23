@@ -11,16 +11,14 @@ public interface ProductDAO {
 	public CategoryVO findCategoryID(int category_id);// 카테고리 아이디로 카테고리 찾기
 	
 	public int createProduct(String product_name, byte[] product_picture,int customer_id,int category_id,
-			String detail_text_1,String detail_text_2, String detail_text_3, String detail_decription,
-			int village_id);   	//마을 페이지에서 물품입력
+			String detail_key1,String detail_value1,String detail_key2,String detail_value2,String detail_key3,String detail_value3,int village_id);   	//마을 페이지에서 물품입력
 	
 	public int createProduct(String product_name, byte[] product_picture,int customer_id,int category_id,
-			String detail_text_1,String detail_text_2, String detail_text_3, String detail_decription);
+			String detail_key1,String detail_value1,String detail_key2,String detail_value2,String detail_key3,String detail_value3);
 					//메인 페이지에서 물품입력
 	
 	public int updateProduct(int product_id, String product_name, byte[] product_picture,
-							String detail_field1,String detail_field2,String detail_field3,
-							String detail_decription, int village_id);
+							String detail_key1,String detail_value1,String detail_key2,String detail_value2,String detail_key3,String detail_value3,int village_id);
 							//물품 수정
 	
 	public int deleteProduct(int product_id);
