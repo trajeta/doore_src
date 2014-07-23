@@ -122,8 +122,8 @@ public class MySqlCustomerDAO implements CustomerDAO {
 			String sqlStr = "INSERT INTO customers(customer_name, customer_connection, customer_email, customer_password, customer_auto_login, customer_registry) VALUES ( '"
 			+ customerName + "', " 
 					+ customerConnection + ", '" 
-						+ customerEmail + "', '"
-						+ customerPassword + "', "
+						+ customerEmail + "', password('"
+						+ customerPassword + "'), "
 						+ customerAutoLogin +  ", now()) ";
 			result = stmt.executeUpdate(sqlStr);
 			
