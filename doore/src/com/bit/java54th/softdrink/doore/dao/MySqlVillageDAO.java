@@ -454,21 +454,35 @@ public class MySqlVillageDAO implements VillageDAO {
 				else {
 					sqlStr += ",";
 				}
-			}			
+			}	
+			sqlStr += " order by product_id";
+			
 //			if(villageList != null) {
 				ResultSet rset = stmt.executeQuery(sqlStr);
 //			}
 						
 			while (rset.next()) { 
-				int product_id = rset.getInt("product_id");
-				String product_name = rset.getString("product_name");
-				byte[] product_picture = rset.getBytes("product_picture");
-				String product_registry = rset.getString("product_registry");
-				String product_last_update = rset.getString("product_last_update");
-				int category_id = rset.getInt("category_id");
+				int id = rset.getInt("product_id");
+	            String name = rset.getString("product_name");
+	            byte[] picture = rset.getBytes("product_picture");
+	            String registry = rset.getString("product_registry");
+	            String last_update = rset.getString("product_last_update");
+	            int cutomer_id = rset.getInt("customer_id");
+	            int category_id = rset.getInt("category_id");
+	            String detail_key1 = rset.getString("detail_key");
+	            String detail_value1 = rset.getString("detail_value");
+	            rset.next();
+
+	            String detail_key2 = rset.getString("detail_key");
+	            String detail_value2 = rset.getString("detail_value");
+	            rset.next();
+	            String detail_key3 = rset.getString("detail_key");
+	            String detail_value3 = rset.getString("detail_value");
 					
-				productList.add(new ProductVO(product_id, product_name, product_picture, product_registry, product_last_update, customer_id, category_id));
-//				productList.add(new ProductVO(product_id, product_name, product_picture, product_registry, product_last_update, customer_id, category_id, detail_text_1, detail_text_2, detail_text_3, detail_decription));
+//				productList.add(new ProductVO(product_id, product_name, product_picture, product_registry, product_last_update, customer_id, category_id));
+				productList.add(new ProductVO(id, name, picture, registry, 
+						last_update, customer_id, category_id, detail_key1, 
+						detail_value1, detail_key2, detail_value2, detail_key3, detail_value3));
 				}
 		} catch (SQLException ex) {
 			Logger.getLogger(MySqlVillageDAO.class.getName()).log(Level.SEVERE,
