@@ -444,7 +444,7 @@ public class MySqlVillageDAO implements VillageDAO {
 
 //			String sqlStr = "select distinct product_id from product_village where village_id in (";
 			
-			String sqlStr = "select * from products where product_id in (select distinct product_id from product_village where village_id in (";
+			String sqlStr = "select * from products join product_detail on products.product_id = product_detail.product_id where products.product_id in (select distinct product_id from product_village where village_id in (";
 			
 			for(int i = 0 ; i < villageList.size() ; i++) {
 				sqlStr += villageList.get(i).getId();
@@ -455,7 +455,7 @@ public class MySqlVillageDAO implements VillageDAO {
 					sqlStr += ",";
 				}
 			}	
-			sqlStr += " order by product_id";
+			sqlStr += " order by products.product_id";
 			
 //			if(villageList != null) {
 				ResultSet rset = stmt.executeQuery(sqlStr);
@@ -467,7 +467,6 @@ public class MySqlVillageDAO implements VillageDAO {
 	            byte[] picture = rset.getBytes("product_picture");
 	            String registry = rset.getString("product_registry");
 	            String last_update = rset.getString("product_last_update");
-	            int cutomer_id = rset.getInt("customer_id");
 	            int category_id = rset.getInt("category_id");
 	            String detail_key1 = rset.getString("detail_key");
 	            String detail_value1 = rset.getString("detail_value");

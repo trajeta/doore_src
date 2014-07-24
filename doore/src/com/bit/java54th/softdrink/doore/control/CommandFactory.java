@@ -29,7 +29,6 @@ public class CommandFactory {
 			break;	
 		case "/signup":
 			target = new SignupCommand();
-
 			break;
 		case "/mypage":
 			target = new MypageCommand();
